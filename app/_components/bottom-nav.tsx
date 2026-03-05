@@ -7,7 +7,7 @@ import {
   ChartNoAxesColumn,
   UserRound,
 } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +17,7 @@ interface BottomNavProps {
 
 export function BottomNav({ workoutPlanHref }: BottomNavProps) {
   const pathname = usePathname();
+  const router = useRouter();
 
 
   const navItems = [
@@ -42,6 +43,7 @@ export function BottomNav({ workoutPlanHref }: BottomNavProps) {
           return (
             <button
               key={item.label}
+              onClick={() => router.push("?chat_open=true", { scroll: false })}
               className="flex items-center justify-center rounded-full bg-primary p-4"
             >
               <item.icon className="size-6 text-primary-foreground" />

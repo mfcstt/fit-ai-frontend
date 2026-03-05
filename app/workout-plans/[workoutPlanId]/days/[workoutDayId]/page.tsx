@@ -73,7 +73,12 @@ export default async function WorkoutDayPage({ params }: WorkoutDayPageProps) {
                 <p className="text-base font-semibold text-foreground">
                   {exercise.name}
                 </p>
-                <CircleHelp className="size-5 text-muted-foreground" />
+                <Link
+                  href={`?chat_open=true&initial_message=${encodeURIComponent(`Como executar exercício ${exercise.name} corretamente?`)}`}
+                  scroll={false}
+                >
+                  <CircleHelp className="size-5 text-muted-foreground" />
+                </Link>
               </div>
               <div className="flex gap-1.5">
                 <span className="rounded-full bg-muted px-2.5 py-1 text-xs font-semibold uppercase text-muted-foreground">
