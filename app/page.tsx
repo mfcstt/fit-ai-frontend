@@ -24,7 +24,7 @@ export default async function Home() {
 
   if (homeData.status !== 200) redirect("/auth");
 
-  const { todayWorkoutDay, workoutStreak, consistencyByDay } = homeData.data;
+  const { todayWorkoutDay, workoutStreak, consistencyByDay, activeWorkoutPlanId } = homeData.data;
   const userName = session.data.user.name ?? "Atleta";
 
   return (
@@ -87,10 +87,17 @@ export default async function Home() {
             <p className="text-lg font-semibold text-foreground">
               Treino de Hoje
             </p>
-            <button className="text-xs text-primary">Ver treinos</button>
+            <Link
+              href={`/workout-plans/${activeWorkoutPlanId}`}
+              className="text-xs text-primary"
+            >
+              Ver treinos
+            </Link>
           </div>
 
-          <Link href="#">
+          <Link
+            href={`/workout-plans/${todayWorkoutDay.workoutPlanId}/days/${todayWorkoutDay.id}`}
+          >
             <WorkoutDayCard
               name={todayWorkoutDay.name}
               weekDay={todayWorkoutDay.weekDay}
@@ -104,7 +111,9 @@ export default async function Home() {
         </div>
       )}
 
-      <BottomNav />
+      <BottomNav
+        workoutPlanHref={`/workout-plans/${activeWorkoutPlanId}`}
+      />
     </div>
   );
 }

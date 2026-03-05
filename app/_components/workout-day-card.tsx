@@ -1,5 +1,6 @@
 import { Calendar, Timer, Dumbbell } from "lucide-react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const WEEK_DAY_LABELS: Record<string, string> = {
   SUNDAY: "DOMINGO",
@@ -17,6 +18,7 @@ interface WorkoutDayCardProps {
   estimatedDurationInSeconds: number;
   exercisesCount: number;
   coverImageUrl?: string;
+  isToday?: boolean;
 }
 
 export function WorkoutDayCard({
@@ -25,6 +27,7 @@ export function WorkoutDayCard({
   estimatedDurationInSeconds,
   exercisesCount,
   coverImageUrl,
+  isToday,
 }: WorkoutDayCardProps) {
   const durationMinutes = Math.round(estimatedDurationInSeconds / 60);
   const weekDayLabel = WEEK_DAY_LABELS[weekDay] ?? weekDay;
@@ -43,10 +46,15 @@ export function WorkoutDayCard({
       <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
 
       <div className="relative flex items-center justify-center">
-        <div className="flex items-center gap-1 rounded-full bg-white/16 px-2.5 py-1.5 backdrop-blur-sm">
+        <div
+          className={cn(
+            "flex items-center gap-1 rounded-full px-2.5 py-1.5 backdrop-blur-sm",
+            isToday ? "bg-primary" : "bg-white/16",
+          )}
+        >
           <Calendar className="size-3.5 text-background" />
           <span className="text-xs font-semibold uppercase text-background">
-            {weekDayLabel}
+            {isToday ? "HOJE" : weekDayLabel}
           </span>
         </div>
       </div>
