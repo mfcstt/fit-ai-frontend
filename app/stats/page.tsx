@@ -32,9 +32,15 @@ export default async function StatsPage() {
     getHomeData(today.format("YYYY-MM-DD")),
   ]);
 
-  if (response.status !== 200) redirect("/");
-
-  const stats = response.data;
+  const stats = response.status === 200
+    ? response.data
+    : {
+        workoutStreak: 0,
+        completedWorkoutsCount: 0,
+        conclusionRate: 0,
+        totalTimeInSeconds: 0,
+        consistencyByDay: {},
+      };
   const hasStreak = stats.workoutStreak > 0;
   const workoutPlanHref =
     homeResponse.status === 200

@@ -74,7 +74,7 @@ export default async function WorkoutDayPage({ params }: WorkoutDayPageProps) {
                   {exercise.name}
                 </p>
                 <Link
-                  href={`?chat_open=true&initial_message=${encodeURIComponent(`Como executar exercício ${exercise.name} corretamente?`)}`}
+                  href={`?chat_open=true&chat_initial_message=${encodeURIComponent(`Como executar exercício ${exercise.name} corretamente?`)}`}
                   scroll={false}
                 >
                   <CircleHelp className="size-5 text-muted-foreground" />

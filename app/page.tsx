@@ -5,7 +5,7 @@ import { getHomeData } from "./_lib/api/fetch-generated";
 import dayjs from "dayjs";
 import Link from "next/link";
 import Image from "next/image";
-import { Flame, Sparkles } from "lucide-react";
+import { Flame } from "lucide-react";
 import { BottomNav } from "@/app/_components/bottom-nav";
 import { WorkoutDayCard } from "@/app/_components/workout-day-card";
 import { Button } from "@/components/ui/button";
@@ -24,38 +24,7 @@ export default async function Home() {
   const userName = session.data.user.name ?? "Atleta";
 
   if (homeData.status !== 200) {
-    return (
-      <div className="flex min-h-svh flex-col bg-background pb-24">
-        <div className="relative flex h-74 flex-col items-start justify-between overflow-hidden rounded-b-4xl bg-primary px-5 pb-10 pt-5">
-          <p className="relative font-sans text-[22px] font-bold uppercase leading-tight text-primary-foreground">
-            Fit.ai
-          </p>
-
-          <div className="relative flex w-full items-end justify-between">
-            <div className="flex flex-col gap-1.5">
-              <p className="text-2xl font-semibold leading-tight text-primary-foreground">
-                Olá, {userName}
-              </p>
-              <p className="text-sm text-primary-foreground/70">
-                Bora treinar hoje?
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-1 flex-col items-center justify-center gap-3 px-5">
-          <Sparkles className="size-12 text-muted-foreground" />
-          <p className="text-center text-lg font-semibold text-foreground">
-            Nenhum plano de treino ativo
-          </p>
-          <p className="text-center text-sm text-muted-foreground">
-            Use a IA para criar seu plano de treino personalizado.
-          </p>
-        </div>
-
-        <BottomNav />
-      </div>
-    );
+    redirect("/ai");
   }
 
   const { todayWorkoutDay, workoutStreak, consistencyByDay, activeWorkoutPlanId } = homeData.data;
